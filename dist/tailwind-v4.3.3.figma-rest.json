@@ -2965,7 +2965,7 @@
     {
       "action": "CREATE",
       "id": "tw_var_294",
-      "name": "spacing/0.5",
+      "name": "spacing/0_5",
       "variableCollectionId": "tw_collection",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -2987,7 +2987,7 @@
     {
       "action": "CREATE",
       "id": "tw_var_296",
-      "name": "spacing/1.5",
+      "name": "spacing/1_5",
       "variableCollectionId": "tw_collection",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -3009,7 +3009,7 @@
     {
       "action": "CREATE",
       "id": "tw_var_298",
-      "name": "spacing/2.5",
+      "name": "spacing/2_5",
       "variableCollectionId": "tw_collection",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -3031,7 +3031,7 @@
     {
       "action": "CREATE",
       "id": "tw_var_300",
-      "name": "spacing/3.5",
+      "name": "spacing/3_5",
       "variableCollectionId": "tw_collection",
       "resolvedType": "FLOAT",
       "scopes": [

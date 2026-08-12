@@ -103,8 +103,9 @@ function parseShadows(value) {
 // type: COLOR | FLOAT | STRING (Figma resolved types); DTCG type derived from it
 // ---------------------------------------------------------------------------
 const tokens = []
+// Figma rejects "." in variable names (e.g. spacing/0.5), so use "_" instead
 const add = (name, type, value, description) =>
-  tokens.push({ name, type, value, ...(description ? { description } : {}) })
+  tokens.push({ name: name.replace(/\./g, '_'), type, value, ...(description ? { description } : {}) })
 
 // Tailwind's static spacing utility steps (v4 spacing is --spacing * n)
 const SPACING_STEPS = [
