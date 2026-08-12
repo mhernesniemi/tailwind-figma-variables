@@ -1,4 +1,4 @@
-# Tailwind v4.3.3 → Figma Variables JSON
+# Tailwind v4 → Figma Variables JSON
 
 Converts the Tailwind CSS default theme (`tailwindcss/theme.css`) into Figma
 Variables JSON. Pinned to whatever `tailwindcss` version is installed
@@ -13,9 +13,9 @@ npm run build
 
 Outputs to `dist/`:
 
-| File | Format | Use with |
-| --- | --- | --- |
-| `tailwind-v4.3.3.tokens.json` | W3C DTCG design tokens | Import plugins: Tokens Studio, Figma's `variables-import` sample plugin, Style Dictionary |
+| File                              | Format                           | Use with                                                                                                                  |
+| --------------------------------- | -------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| `tailwind-v4.3.3.tokens.json`     | W3C DTCG design tokens           | Import plugins: Tokens Studio, Figma's `variables-import` sample plugin, Style Dictionary                                 |
 | `tailwind-v4.3.3.figma-rest.json` | Figma Variables REST API payload | `POST https://api.figma.com/v1/files/:file_key/variables` (requires an Enterprise plan token with `file_variables:write`) |
 
 To push via the REST API:
