@@ -1,15 +1,24 @@
 # Tailwind v4 → Figma Variables JSON
 
-Converts the Tailwind CSS default theme (`tailwindcss/theme.css`) into Figma
-Variables JSON. Pinned to whatever `tailwindcss` version is installed
+Converts the Tailwind CSS default theme (`tailwindcss/theme.css`) into a JSON
+file you can import straight into Figma as variables — using Figma's native
+variable import. Pinned to whatever `tailwindcss` version is installed
 (currently **4.3.3**).
 
-## Download directly
+## Download
 
-- [`tailwind-v4.3.3.tokens.json`](https://github.com/mhernesniemi/tailwind-figma-variables/releases/download/v4.3.3/tailwind-v4.3.3.tokens.json) — W3C DTCG design tokens
-- [`tailwind-v4.3.3.figma-rest.json`](https://github.com/mhernesniemi/tailwind-figma-variables/releases/download/v4.3.3/tailwind-v4.3.3.figma-rest.json) — Figma Variables REST API payload
+Don't want to clone? Grab the generated JSON directly:
+
+- [`tailwind-v4.3.3.json`](https://github.com/mhernesniemi/tailwind-figma-variables/releases/download/v4.3.3/tailwind-v4.3.3.json)
 
 All versions are on the [releases page](https://github.com/mhernesniemi/tailwind-figma-variables/releases).
+
+## Import into Figma
+
+1. In your Figma file, open the **Variables** view
+2. Import the JSON file — a **Tailwind** collection appears with all 417 variables
+3. Bind away: fills and strokes offer `color/*`, corner radius offers
+   `radius/*`, gaps and padding offer `spacing/*`, and so on
 
 ## Or build it yourself
 
@@ -18,50 +27,29 @@ npm install
 npm run build
 ```
 
-Outputs to `dist/`:
-
-| File                              | Format                           | Use with                                                                                                                  |
-| --------------------------------- | -------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| `tailwind-v4.3.3.tokens.json`     | W3C DTCG design tokens           | Import plugins: Tokens Studio, Figma's `variables-import` sample plugin, Style Dictionary                                 |
-| `tailwind-v4.3.3.figma-rest.json` | Figma Variables REST API payload | `POST https://api.figma.com/v1/files/:file_key/variables` (requires an Enterprise plan token with `file_variables:write`) |
-
-To push via the REST API:
-
-```sh
-curl -X POST "https://api.figma.com/v1/files/$FILE_KEY/variables" \
-  -H "X-Figma-Token: $FIGMA_TOKEN" \
-  -H "Content-Type: application/json" \
-  -d @dist/tailwind-v4.3.3.figma-rest.json
-```
+Outputs `dist/tailwind-v4.3.3.json`.
 
 ## What gets converted
 
-438 tokens total (417 as Figma variables — shadows are DTCG-only, since Figma
-variables can't represent effects):
+417 variables:
 
 - **`color/*`** (288) — all 26 palettes × 11 shades + black/white. oklch →
-  sRGB, gamut-clamped. COLOR variables.
+  sRGB, gamut-clamped, in Figma's native color object format.
 - **`spacing/*`** — the base `--spacing` multiplier (4px) plus the standard
-  0–96 step scale and `px`, precomputed in px. FLOAT.
+  0–96 step scale and `px`, precomputed in px. Fractional steps use `_`
+  (`spacing/0_5`) because Figma rejects dots in variable names.
 - **`text/size/*`, `text/line-height/*`** — font sizes in px; line-height
-  `calc()` ratios resolved to px for their size (e.g. `base` = 16/24). FLOAT.
+  `calc()` ratios resolved to px for their size (e.g. `base` = 16/24).
 - **`radius/*`, `breakpoint/*`, `container/*`, `blur/*`, `perspective/*`** —
-  rem → px. FLOAT.
-- **`font/weight/*`**, **`leading/*`** (unitless multipliers) — FLOAT.
+  rem → px.
+- **`font/weight/*`**, **`leading/*`** (unitless multipliers).
 - **`tracking/*`** — em converted to percent of font size (e.g. `tight` =
-  −2.5). FLOAT.
-- **`font/family/*`**, **`ease/*`**, **`aspect/video`** — STRING.
-- **`shadow/*`, `inset-shadow/*`, `drop-shadow/*`, `text-shadow/*`** — parsed
-  into structured DTCG `shadow` layers (DTCG file only).
+  −2.5).
+- **`font/family/*`**, **`ease/*`**, **`aspect/video`** — strings.
 
-Skipped: `--animate-*` (keyframe shorthands) and `--default-*` (internal
-`--theme()` references).
-
-## Conventions
-
-- 1rem = **16px**
-- REST payload creates one collection, `Tailwind v4.3.3`, with a single
-  `Value` mode; variable names use `/` grouping (`color/red/500`).
+Not converted: `--shadow-*` and friends (Figma variables can't represent
+effects — recreate them as effect styles), `--animate-*` keyframe shorthands,
+and internal `--default-*` references.
 
 ## Updating to a new Tailwind release
 
@@ -69,4 +57,4 @@ Skipped: `--animate-*` (keyframe shorthands) and `--default-*` (internal
 npm install tailwindcss@latest && npm run build
 ```
 
-Output filenames pick up the installed version automatically.
+The output filename picks up the installed version automatically.
