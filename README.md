@@ -4,7 +4,12 @@ Converts the Tailwind CSS default theme (`tailwindcss/theme.css`) into Figma
 Variables JSON. Pinned to whatever `tailwindcss` version is installed
 (currently **4.3.3**).
 
-## Usage
+## Download directly
+
+- [`tailwind-v4.3.3.tokens.json`](https://github.com/mhernesniemi/tailwind-figma-variables/raw/main/dist/tailwind-v4.3.3.tokens.json) — W3C DTCG design tokens
+- [`tailwind-v4.3.3.figma-rest.json`](https://github.com/mhernesniemi/tailwind-figma-variables/raw/main/dist/tailwind-v4.3.3.figma-rest.json) — Figma Variables REST API payload
+
+## Or build it yourself
 
 ```sh
 npm install
